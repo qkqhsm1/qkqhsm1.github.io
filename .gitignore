@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+.superpowers/
+.npm-install.log
+
+# C/C++ source never lands in this public repo (engine stays private in SPMe_Params)
+*.c
+*.cc
+*.cpp
+*.h
+*.hpp
+
+# Planning notes stay local: they name private files, folders and infrastructure
+docs/superpowers/
+MDs/
