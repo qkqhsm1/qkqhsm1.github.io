@@ -6,7 +6,7 @@ const M = { left: 62, right: 16, top: 12, bottom: 50 }
 export function LineChart({ title, unit, x, y }: { title: string; unit: string; x: Float64Array; y: Float64Array }) {
   const d = downsampleMinMax(x, y, 400)
   const [y0, y1] = yDomain(d.y)
-  const x0 = d.x[0] ?? 0
+  const x0 = Math.min(0, d.x[0] ?? 0) // time axis starts at 0 s; the first sample is at 1 s
   const x1 = d.x.length > 1 && d.x[d.x.length - 1] > x0 ? d.x[d.x.length - 1] : x0 + 1
   const sx = (v: number) => M.left + ((v - x0) / (x1 - x0)) * (W - M.left - M.right)
   const sy = (v: number) => H - M.bottom - ((v - y0) / (y1 - y0)) * (H - M.top - M.bottom)

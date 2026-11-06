@@ -22,11 +22,12 @@ function Lock() {
 export function SiteHeader({ active }: { active: Page }) {
   const item = 'pb-0.5 text-sub hover:text-ink'
   return (
-    <nav className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 pb-9 pt-1 text-[17px]">
+    <nav className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 pb-9 pt-1 text-[16px] sm:text-[17px]">
       <Link to="/" className="text-[19px] font-semibold text-navy">
         S.CHOI
       </Link>
-      <div className="flex flex-wrap gap-x-7 gap-y-1">
+      {/* gap-x-4 below sm keeps all four items on one line down to 360 px */}
+      <div className="flex flex-wrap gap-x-4 gap-y-1 sm:gap-x-7">
         {PAGES.map((p) => (
           <Link
             key={p.id}

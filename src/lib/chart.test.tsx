@@ -28,3 +28,9 @@ test('a flat series draws a finite line across the full width', () => {
   expect(points).not.toBe('')
   expect(points).not.toContain('NaN')
 })
+test('the time axis starts at 0 even when the first sample is at t = 1 s', () => {
+  const x = new Float64Array(3600).map((_, i) => i + 1)
+  render(<LineChart title="T0" unit="K" x={x} y={new Float64Array(3600).fill(300)} />)
+  const labels = [...screen.getByRole('img', { name: 'T0' }).querySelectorAll('text')].map((t) => t.textContent)
+  expect(labels).toContain('0')
+})
