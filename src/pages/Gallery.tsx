@@ -4,6 +4,7 @@ import { albums, GALLERY_YEARS, type Album } from '@/content/gallery'
 
 const yearOf = (a: Album) => Number(a.date.slice(0, 4))
 const years = [...new Set([...GALLERY_YEARS, ...albums.map(yearOf)])].sort((a, b) => b - a)
+const newestYear = Math.max(...albums.map(yearOf))
 
 const ARROW = 'absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-[26px] leading-none text-white hover:bg-black/75'
 
@@ -61,8 +62,16 @@ export function Gallery() {
       {years.map((y) => {
         const list = albums.filter((a) => yearOf(a) === y).sort((a, b) => b.date.localeCompare(a.date))
         return (
-          <section key={y} className="mt-14">
-            <h2 className="border-b border-rule pb-2 text-[32px] font-semibold leading-none text-navy">{y}</h2>
+          <details key={y} open={y === newestYear} className="group mt-14">
+            <summary className="flex cursor-pointer list-none items-center justify-between border-b border-rule pb-2 [&::-webkit-details-marker]:hidden">
+              <h2 className="text-[32px] font-semibold leading-none text-navy">{y}</h2>
+              <span className="flex items-center gap-3 text-[15px] text-sub">
+                {list.length > 0 && `${list.length} ${list.length === 1 ? 'album' : 'albums'}`}
+                <span aria-hidden="true" className="text-[26px] leading-none transition-transform group-open:rotate-90">
+                  ›
+                </span>
+              </span>
+            </summary>
             {list.length === 0 && <p className="mt-6 text-[17px] text-sub">Photos coming soon.</p>}
             {/* Two albums per row from md up, one on phones */}
             <div className="mt-8 grid gap-x-10 gap-y-12 md:grid-cols-2">
@@ -79,7 +88,7 @@ export function Gallery() {
                 </article>
               ))}
             </div>
-          </section>
+          </details>
         )
       })}
     </PageShell>

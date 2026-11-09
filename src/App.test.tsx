@@ -52,6 +52,16 @@ test('2024 shows the KSAE spring conference album with its photo', () => {
   expect(screen.getByRole('img', { name: /KSAE Spring Conference/ })).toHaveAttribute('src', '/gallery/2024-06-ksae-spring/group.jpg')
 })
 
+test('only the newest year with albums starts open, and each year shows its album count', () => {
+  at('/gallery')
+  const year = (name: string) => screen.getByRole('heading', { level: 2, name }).closest('details')
+  expect(year('2026')).toHaveAttribute('open')
+  expect(year('2025')).not.toHaveAttribute('open')
+  expect(year('2024')).not.toHaveAttribute('open')
+  expect(year('2026')).toHaveTextContent('3 albums')
+  expect(year('2025')).toHaveTextContent('4 albums')
+})
+
 test('album arrows slide one frame at a time and wrap at the ends', () => {
   const width = vi.spyOn(Element.prototype, 'clientWidth', 'get').mockReturnValue(400)
   at('/gallery')
