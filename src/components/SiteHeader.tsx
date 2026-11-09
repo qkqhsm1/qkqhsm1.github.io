@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom'
 import { DOCS_URL } from '@/config'
 import { cn } from '@/lib/utils'
 
-export type Page = 'home' | 'research' | 'battery-sim'
+export type Page = 'home' | 'research' | 'gallery' | 'battery-sim'
 
 const PAGES: { id: Page; label: string; to: string }[] = [
   { id: 'home', label: 'Home', to: '/' },
   { id: 'research', label: 'Research', to: '/research' },
+  { id: 'gallery', label: 'Gallery', to: '/gallery' },
   { id: 'battery-sim', label: 'Battery Sim', to: '/battery-sim' },
 ]
 
@@ -22,12 +23,12 @@ function Lock() {
 export function SiteHeader({ active }: { active: Page }) {
   const item = 'pb-0.5 text-sub hover:text-ink'
   return (
-    <nav className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 pb-9 pt-1 text-[16px] sm:text-[17px]">
+    <nav className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 pb-9 pt-1 text-[14px] sm:text-[17px]">
       <Link to="/" className="text-[19px] font-semibold text-navy">
         S.CHOI
       </Link>
-      {/* gap-x-4 below sm keeps all four items on one line down to 360 px */}
-      <div className="flex flex-wrap gap-x-4 gap-y-1 sm:gap-x-7">
+      {/* gap-x-3 and 14 px below sm keep all five items on one line down to 360 px */}
+      <div className="flex flex-wrap gap-x-3 gap-y-1 sm:gap-x-7">
         {PAGES.map((p) => (
           <Link
             key={p.id}
