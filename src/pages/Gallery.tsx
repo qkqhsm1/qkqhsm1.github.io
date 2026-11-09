@@ -1,8 +1,59 @@
+import { useRef, useState } from 'react'
 import { PageShell } from '@/components/PageShell'
 import { albums, GALLERY_YEARS, type Album } from '@/content/gallery'
 
 const yearOf = (a: Album) => Number(a.date.slice(0, 4))
 const years = [...new Set([...GALLERY_YEARS, ...albums.map(yearOf)])].sort((a, b) => b - a)
+
+const ARROW = 'absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/55 text-[26px] leading-none text-white hover:bg-black/75'
+
+// Same 4:3 frame for every album. CSS scroll-snap does the sliding, so touch swipe works without extra code.
+function Photos({ title, photos }: Pick<Album, 'title' | 'photos'>) {
+  const scroller = useRef<HTMLDivElement>(null)
+  const [index, setIndex] = useState(0)
+  // ponytail: a click during a slide counts from the photo still on screen; track a target index if fast clicks matter
+  const go = (step: number) => {
+    const el = scroller.current
+    if (el) el.scrollTo({ left: el.clientWidth * ((index + step + photos.length) % photos.length) })
+  }
+
+  return (
+    <div className="relative mt-auto overflow-hidden rounded bg-tint">
+      <div
+        ref={scroller}
+        data-testid={`photos-${title}`}
+        onScroll={(e) => setIndex(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))}
+        className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] motion-safe:scroll-smooth"
+      >
+        {photos.map((p) => (
+          // ponytail: opening the full image in a new tab stands in for a lightbox
+          <a key={p.src} href={p.src} target="_blank" rel="noreferrer" className="block w-full shrink-0 snap-start overflow-hidden">
+            <img
+              src={p.src}
+              alt={p.alt}
+              loading="lazy"
+              style={{ objectPosition: p.position }}
+              className="aspect-[4/3] w-full object-cover transition-transform hover:scale-[1.03]"
+            />
+          </a>
+        ))}
+      </div>
+      {photos.length > 1 && (
+        <>
+          <button type="button" aria-label={`Previous photo: ${title}`} onClick={() => go(-1)} className={`${ARROW} left-2`}>
+            ‹
+          </button>
+          <button type="button" aria-label={`Next photo: ${title}`} onClick={() => go(1)} className={`${ARROW} right-2`}>
+            ›
+          </button>
+          <p className="absolute bottom-2 right-2 rounded-full bg-black/55 px-2.5 py-0.5 text-[13px] text-white">
+            {index + 1} / {photos.length}
+          </p>
+        </>
+      )}
+    </div>
+  )
+}
 
 export function Gallery() {
   return (
@@ -23,20 +74,8 @@ export function Gallery() {
                     {a.date}
                     {a.place && ` · ${a.place}`}
                   </p>
-                  {a.caption && <p className="mt-3 text-[16px] leading-[1.65]">{a.caption}</p>}
-                  <div className={a.photos.length === 1 ? 'mt-auto pt-5' : 'mt-auto grid grid-cols-2 gap-2 pt-5'}>
-                    {a.photos.map((p) => (
-                      // ponytail: opening the full image in a new tab stands in for a lightbox
-                      <a key={p.src} href={p.src} target="_blank" rel="noreferrer" className="block overflow-hidden rounded bg-tint">
-                        <img
-                          src={p.src}
-                          alt={p.alt}
-                          loading="lazy"
-                          className="aspect-[4/3] w-full object-cover transition-transform hover:scale-[1.03]"
-                        />
-                      </a>
-                    ))}
-                  </div>
+                  {a.caption && <p className="mb-5 mt-3 text-[16px] leading-[1.65]">{a.caption}</p>}
+                  <Photos title={a.title} photos={a.photos} />
                 </article>
               ))}
             </div>
