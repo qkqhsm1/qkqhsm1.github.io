@@ -36,3 +36,6 @@ dist-ssr
 # Planning notes stay local: they name private files, folders and infrastructure
 docs/superpowers/
 MDs/
+
+# CV drafts stay local until the owner asks to publish one
+docs/*CV*

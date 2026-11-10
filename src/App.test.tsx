@@ -69,16 +69,16 @@ test('album arrows slide one frame at a time and wrap at the ends', () => {
   const scroller = screen.getByTestId(`photos-${title}`)
   const scrollTo = vi.fn()
   scroller.scrollTo = scrollTo
-  expect(screen.getByText('1 / 5')).toBeInTheDocument()
+  expect(screen.getByText('1 / 4')).toBeInTheDocument()
 
   fireEvent.click(screen.getByRole('button', { name: `Next photo: ${title}` }))
   expect(scrollTo).toHaveBeenLastCalledWith({ left: 400 })
   fireEvent.click(screen.getByRole('button', { name: `Previous photo: ${title}` }))
-  expect(scrollTo).toHaveBeenLastCalledWith({ left: 1600 }) // first photo wraps to the last
+  expect(scrollTo).toHaveBeenLastCalledWith({ left: 1200 }) // first photo wraps to the last
 
   scroller.scrollLeft = 800
   fireEvent.scroll(scroller)
-  expect(screen.getByText('3 / 5')).toBeInTheDocument()
+  expect(screen.getByText('3 / 4')).toBeInTheDocument()
   width.mockRestore()
 })
 

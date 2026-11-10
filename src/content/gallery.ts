@@ -27,7 +27,6 @@ export const albums: Album[] = [
       { src: '/gallery/2026-05-seattle-olympic/pike-place.jpg', alt: 'Public Market Center sign at Pike Place Market in Seattle' },
       { src: '/gallery/2026-05-seattle-olympic/starbucks.jpg', alt: 'Lab members in front of the original Starbucks in Seattle' },
       { src: '/gallery/2026-05-seattle-olympic/space-needle.jpg', alt: 'The Space Needle against a partly cloudy sky', position: 'top' },
-      { src: '/gallery/2026-05-seattle-olympic/olympic-hike.jpg', alt: 'Lab members on a mountain trail in Olympic National Park', position: 'bottom' },
       { src: '/gallery/2026-05-seattle-olympic/olympic-walk.jpg', alt: 'Lab members walking along a path toward snow-capped mountains' },
     ],
   },
@@ -38,12 +37,7 @@ export const albums: Album[] = [
     place: 'Seattle, USA',
     caption:
       'Four lab members presented posters at the 249th Meeting of the Electrochemical Society (ECS), covering single particle modeling, parameter validation, 3D analysis of large-format prismatic cells and heat generation models.',
-    photos: [
-      { src: '/gallery/2026-05-ecs-poster/poster-1.jpg', alt: 'A lab member with their poster at the ECS 249th Meeting' },
-      { src: '/gallery/2026-05-ecs-poster/poster-2.jpg', alt: 'Discussing a poster with a visitor at the ECS 249th Meeting' },
-      { src: '/gallery/2026-05-ecs-poster/poster-3.jpg', alt: 'A lab member with their poster on large-format prismatic cells at the ECS 249th Meeting' },
-      { src: '/gallery/2026-05-ecs-poster/poster-4.jpg', alt: 'A lab member with their poster on heat generation models at the ECS 249th Meeting' },
-    ],
+    photos: [{ src: '/gallery/2026-05-ecs-poster/poster-2.jpg', alt: 'Discussing a poster with a visitor at the ECS 249th Meeting' }],
   },
   {
     title: 'With Prof. Chao-Yang Wang',
