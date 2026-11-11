@@ -81,7 +81,7 @@ export const education: EducationItem[] = [
     logo: HYU,
     degree: 'Integrated M.S./Ph.D.',
     institution: 'Hanyang University',
-    detail: 'Dept. of Mechanical Design Engineering · REAL',
+    detail: 'Dept. of Mechanical Design Engineering · Renewable Engine Analysis Laboratory (REAL)',
   },
   {
     start: 2023,
@@ -89,7 +89,7 @@ export const education: EducationItem[] = [
     logo: HYU,
     degree: 'B.S.',
     institution: 'Hanyang University ERICA',
-    detail: 'Dept. of Mechanical Engineering',
+    detail: 'Dept. of Mechanical Engineering · GPA 4.24/4.5 · Summa Cum Laude',
   },
   {
     start: 2021,
@@ -97,7 +97,7 @@ export const education: EducationItem[] = [
     logo: JNU,
     degree: 'Undergraduate',
     institution: 'Jeju National University',
-    detail: 'Dept. of Mechatronics Engineering · Transferred to Hanyang University ERICA',
+    detail: 'Dept. of Mechatronics Engineering · GPA 4.1/4.3 · Transferred to Hanyang University ERICA',
   },
 ]
 
